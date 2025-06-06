@@ -17,7 +17,7 @@ var reviewRouter = require('./routes/reviewRoutes');
 
 
 var app = express();
-
+securityMiddleware(app);
 content();
 
 
@@ -28,14 +28,11 @@ app.use(cors({
   exposedHeaders: ['auth-token']
 }));
 
-const compression = require("compression")
-app.use(compression())
 
-app.use(logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(securityMiddleware);
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
